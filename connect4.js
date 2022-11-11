@@ -5,6 +5,8 @@
  * board fills (tie)
  */
 
+// assuming constructor takes height, width
+/** start button */
 
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
@@ -110,7 +112,7 @@ class Game {
     }
 
     checkForWin() {
-        function _win(cells) {
+        const _win = cells => {
             // Check four cells to see if they're all color of current player
             //  - cells: list of four (y, x) cells
             //  - returns true if all are legal coordinates & all match currPlayer
@@ -135,7 +137,7 @@ class Game {
                 const diagDL = [[y, x], [y + 1, x - 1], [y + 2, x - 2], [y + 3, x - 3]];
 
                 // find winner (only checking each win-possibility as needed)
-                if (_win.call(this, horiz) || _win.call(this, vert) || _win.call(this, diagDR) || _win.call(this, diagDL)) {
+                if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
                     return true;
                 }
             }
@@ -145,7 +147,12 @@ class Game {
 
 }
 
-new Game(6, 7);   // assuming constructor takes height, width
+const startBtn = document.getElementById('start');
+startBtn.addEventListener('click', startGame.bind(null, 6, 7));
+
+function startGame(h, w) {
+    return new Game(h, w);
+}
 
 // function makeBoard() {
 //     for (let y = 0; y < HEIGHT; y++) {
