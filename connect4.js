@@ -8,6 +8,14 @@
 // assuming constructor takes height, width
 /** start button */
 
+
+class Player {
+    constructor(playerNumber, color) {
+        this.playerNumber = playerNumber;
+        this.color = color;
+    }
+}
+
 /** makeBoard: create in-JS board structure:
  *   board = array of rows, each row is array of cells  (board[y][x])
  */
@@ -151,6 +159,7 @@ const startBtn = document.getElementById('start');
 startBtn.addEventListener('click', startGame.bind(null, 6, 7));
 
 function startGame(h, w) {
+    document.querySelector("#board").innerHTML = "";
     return new Game(h, w);
 }
 
