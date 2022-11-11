@@ -21,12 +21,12 @@ class Player {
  */
 
 class Game {
-    constructor(h = 6, w = 7) {
+    constructor(h = 6, w = 7, p1 = 'yellow', p2 = 'blue') {
         this.height = h;
         this.width = w;
         this.board = []; // array of rows, each row is array of cells  (board[y][x])
-        this.playerOne = new Player(1, "orange");
-        this.playerTwo = new Player(2, "purple");
+        this.playerOne = new Player(1, p1);
+        this.playerTwo = new Player(2, p2);
         console.log(this.playerTwo);
         this.currPlayer = this.playerOne; // active player: 1 or 2
         this.makeBoard();
@@ -83,6 +83,7 @@ class Game {
     placeInTable(y, x) {
         const piece = document.createElement('div');
         piece.classList.add('piece');
+        piece.style.backgroundColor = this.currPlayer.color;
         piece.classList.add(`p${this.currPlayer.playerNumber}`);
         piece.style.top = -50 * (y + 2);
 
@@ -119,7 +120,7 @@ class Game {
         }
 
         // switch players
-        this.currPlayer = this.currPlayer === this.playerOne ? this.playerTwo 
+        this.currPlayer = this.currPlayer === this.playerOne ? this.playerTwo
             : this.playerOne;
     }
 
@@ -164,7 +165,9 @@ startBtn.addEventListener('click', startGame.bind(null, 6, 7));
 
 function startGame(h, w) {
     document.querySelector("#board").innerHTML = "";
-    return new Game(h, w);
+    const p1 = document.getElementById('p1').value;
+    const p2 = document.getElementById('p2').value;
+    return new Game(h, w, p1, p2);
 }
 
 // function makeBoard() {
